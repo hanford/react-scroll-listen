@@ -1,0 +1,50 @@
+{
+  "name": "react-scroll-listen",
+  "version": "0.1.0",
+  "description": "Notify HOC in react when a scroll happens",
+  "main": "./dist/react-scroll-listen.min.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hanford/react-scroll-listen.git"
+  },
+  "homepage": "https://github.com/hanford/react-scroll-listen",
+  "bugs": "https://github.com/hanford/react-scroll-listen/issues",
+  "scripts": {
+    "build": "webpack -p"
+  },
+  "authors": [
+    "Jack Hanford"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "~6.24.1",
+    "babel-loader": "~6.4.1",
+    "babel-preset-env": "~1.5.2",
+    "babel-preset-react": "~6.24.1",
+    "babel-preset-stage-0": "~6.24.1",
+    "react": "~15.5.3",
+    "react-dom": "~15.5.3",
+    "webpack": "~2.3.3"
+  },
+  "dependencies": {
+    "global": "~4.3.2"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0"
+  },
+  "tags": [
+    "react",
+    "scroll",
+    "event listener",
+    "onScroll",
+    "state"
+  ],
+  "keywords": [
+    "react",
+    "scroll",
+    "event listener",
+    "onScroll",
+    "state"
+  ]
+}
