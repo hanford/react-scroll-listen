@@ -25,8 +25,12 @@ render () {
 ```
 
 ## API
-| Param          | Type    | args | required |
-|----------------|---------|-----------------|-----------------|
-| onScroll           | Function | value, event | true |
+| Param              | Type    | args         | default       | required |
+|--------------------|---------|--------------|---------------|----------|
+| onScroll           | Function| value, event |               |   true   |
+| containerToListenOn| ref     |              | window        |   false  |
+| containerToScroll  | ref     |              | document.body |   false  |
+
+Note: `containerToListenOn` and `containerToScroll` can be the same but don't have to be
 
 MIT © [Jack Hanford](http://jackhanford.com)

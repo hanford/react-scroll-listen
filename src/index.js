@@ -5,22 +5,48 @@ import document from 'global/document'
 
 export default class ScrollListener extends PureComponent {
   state = {
-    scroll: 0
+    scroll: 0,
+    containerToListenOn: this.props.containerToListenOn || window,
+    containerToScroll: this.props.containerToScroll || document.body
   }
 
   componentDidMount () {
-    this.setState({scroll: document.body.scrollTop})
-
-    window.addEventListener('scroll', this.recordPosition)
+    this.setState({scroll: this.state.containerToScroll.scrollTop})
+    this.attachListener()
   }
 
   componentWillUnMount () {
-    window.removeEventListener('scroll', this.recordPosition)
+    this.removeListener()
+  }
+
+  componentWillReceiveProps(nextProps, nextState) {
+    if (nextProps.containerToScroll !== this.state.containerToScroll) {
+      this.removeListener()
+      this.setState({
+        containerToScroll: nextProps.containerToScroll,
+        containerToListenOn: nextProps.containerToListenOn,
+        scroll: this.state.containerToScroll.scrollTop
+      }, () => this.attachListener())
+    }
+  }
+
+  attachListener = () => {
+    this.state.containerToListenOn.addEventListener('scroll', this.recordPosition)
+  }
+
+  removeListener = () => {
+    this.state.containerToListenOn.removeEventListener('scroll', this.recordPosition)
   }
 
   recordPosition = event => {
     const { onScroll } = this.props
-    const { target: { body: { scrollTop } } } = event
+
+    let scrollTop
+    if (this.props.containerToListenOn === window) {
+      scrollTop = event.target.body.scrollTop
+    } else {
+      scrollTop = event.target.scrollTop
+    }
 
     const scroll = Number(scrollTop / 1.5)
 
