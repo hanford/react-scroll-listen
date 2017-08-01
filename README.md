@@ -24,12 +24,12 @@ render () {
 }
 ```
 
-## API
+## API / Props
 | Param              | Type    | args         | default       | required |
 |--------------------|---------|--------------|---------------|----------|
 | onScroll           | Function| value, event |               |   true   |
-| containerToListenOn| ref     |              | window        |   false  |
-| containerToScroll  | ref     |              | document.body |   false  |
+| container | ref     |              | window        |   false  |
+| element  | ref     |              | document.body |   false  |
 
 Note: `containerToListenOn` and `containerToScroll` can be the same but don't have to be
 
