@@ -7,20 +7,24 @@ export default class ScrollListener extends PureComponent {
   state = {
     scroll: 0,
     containerToListenOn: this.props.containerToListenOn || window,
-    containerToScroll: this.props.containerToScroll || document.body
+    containerToScroll: this.props.containerToScroll || document.body,
+    hasMounted: false
   }
 
   componentDidMount () {
-    this.setState({scroll: this.state.containerToScroll.scrollTop})
+    this.setState({scroll: this.state.containerToScroll.scrollTop, hasMounted: true})
     this.attachListener()
   }
 
   componentWillUnMount () {
+    this.setState({hasMounted: false})
     this.removeListener()
   }
 
   componentWillReceiveProps(nextProps, nextState) {
-    if (nextProps.containerToScroll !== this.state.containerToScroll) {
+    const { hasMounted } = this.state
+
+    if (hasMounted && nextProps.containerToScroll !== this.state.containerToScroll) {
       this.removeListener()
       this.setState({
         containerToScroll: nextProps.containerToScroll,
@@ -31,27 +35,35 @@ export default class ScrollListener extends PureComponent {
   }
 
   attachListener = () => {
-    this.state.containerToListenOn.addEventListener('scroll', this.recordPosition)
+    const { containerToListenOn } = this.state
+
+    if (!containerToListenOn) return
+
+    containerToListenOn.addEventListener('scroll', this.recordPosition)
   }
 
   removeListener = () => {
-    this.state.containerToListenOn.removeEventListener('scroll', this.recordPosition)
+    const { containerToListenOn } = this.state
+
+    if (!containerToListenOn) return
+
+    containerToListenOn.removeEventListener('scroll', this.recordPosition)
   }
 
   recordPosition = event => {
-    const { onScroll } = this.props
+    const { onScroll, containerToListenOn } = this.props
 
     let scrollTop
-    if (this.props.containerToListenOn === window) {
+
+    console.log(event.target, event.target.body.scrollTop)
+    if (event.target === document) {
       scrollTop = event.target.body.scrollTop
     } else {
       scrollTop = event.target.scrollTop
     }
 
-    const scroll = Number(scrollTop / 1.5)
-
     onScroll(scroll, event)
-    this.setState({ scroll })
+    this.setState({ scroll: scrollTop })
   }
 
   render () {
