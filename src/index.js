@@ -55,7 +55,6 @@ export default class ScrollListener extends PureComponent {
 
     let scrollTop
 
-    console.log(event.target, event.target.body.scrollTop)
     if (event.target === document) {
       scrollTop = event.target.body.scrollTop
     } else {
