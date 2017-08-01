@@ -1,6 +1,6 @@
 {
   "name": "react-scroll-listen",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Notify HOC in react when a scroll happens",
   "main": "./dist/react-scroll-listen.min.js",
   "repository": {
