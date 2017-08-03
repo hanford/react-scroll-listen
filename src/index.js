@@ -19,9 +19,8 @@ export default class ScrollListener extends PureComponent {
     container.addEventListener('scroll', this.recordPosition)
   }
 
-  componentWillUnMount () {
-    const { container } = this.props
-
+  componentWillUnmount () {
+    const { container } = this.state
     container.removeEventListener('scroll', this.recordPosition)
   }
 
