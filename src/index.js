@@ -29,10 +29,14 @@ export default class ScrollListener extends PureComponent {
 
     let scrollTop
 
-    if (event.target === document) {
-      scrollTop = event.target.body.scrollTop
+    if (document.scrollingElement) {
+      scrollTop = document.scrollingElement.scrollTop
     } else {
-      scrollTop = event.target.scrollTop
+      if (event.target === document) {
+        scrollTop = event.target.body.scrollTop
+      } else {
+        scrollTop = event.target.scrollTop
+      }
     }
 
     onScroll(scrollTop, event)
